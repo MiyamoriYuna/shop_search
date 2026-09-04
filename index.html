@@ -21,6 +21,50 @@
     <input type="text" id="search-input" placeholder="店舗名や住所で検索...">
   </div>
 
+  <form id="searchForm">
+  <!-- ジャンル選択 -->
+  <select id="genreSelect">
+    <option value="all">すべてのジャンル</option>
+    <option value="百貨店・総合スーパー">百貨店・総合スーパー</option>
+    <option value="衣料品・呉服・寝具・手芸材料">衣料品・呉服・寝具・手芸材料</option>
+    <option value="医薬品(処方箋除く)・化粧品">医薬品(処方箋除く)・化粧品</option>
+    <option value="各種食料品">各種食料品</option>
+    <option value="飲食">飲食</option>
+    <option value="カメラ・写真">カメラ・写真</option>
+    <option value="宝石・時計・眼鏡等">宝石・時計・眼鏡等</option>
+    <option value="電気製品・通信機器・ミシン">電気製品・通信機器・ミシン</option>
+    <option value="スポーツ・レジャー・ペット販売">スポーツ・レジャー・ペット販売</option>
+    <option value="家具・建産・インテリア">家具・建産・インテリア</option>
+    <option value="文具・OA機器">文具・OA機器</option>
+    <option value="玩具・音楽・書籍">玩具・音楽・書籍</option>
+    <option value="日用雑貨・金物">日用雑貨・金物</option>
+    <option value="靴・鞄・帽子">靴・鞄・帽子</option>
+    <option value="理容・美容・エステ">理容・美容・エステ</option>
+    <option value="旅行">旅行</option>
+    <option value="石油・ガソリン">石油・ガソリン</option>
+    <option value="酒">酒</option>
+    <option value="米穀類">米穀類</option>
+    <option value="花・植木・種子">花・植木・種子</option>
+    <option value="九谷焼・美術・漆器">九谷焼・美術・漆器</option>
+    <option value="土産物・贈答品">土産物・贈答品</option>
+    <option value="自動車・自転車・農機具">自動車・自転車・農機具</option>
+    <option value="公衆浴場">公衆浴場</option>
+    <option value="スポーツ施設">スポーツ施設</option>
+    <option value="タクシー・代行">タクシー・代行</option>
+    <option value="旅館・ホテル">旅館・ホテル</option>
+    <option value="観光施設">観光施設</option>
+    <option value="コンビニエンスストア">コンビニエンスストア</option>
+    <option value="ドラッグストア">ドラッグストア</option>
+    <option value="その他">その他</option>
+  </select>
+
+  <!-- 検索キーワード入力 -->
+  <input type="text" id="searchInput" placeholder="店舗名やキーワードを入力">
+
+  <!-- 検索ボタン -->
+  <button type="submit">検索</button>
+</form>
+
   <!-- 店舗一覧表示エリア -->
   <div id="store-list">データ読み込み中...</div>
 
