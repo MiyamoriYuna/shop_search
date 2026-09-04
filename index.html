@@ -5,65 +5,62 @@
   <title>店舗検索</title>
   <style>
     body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: 0 auto; }
-    .search-box { margin-bottom: 20px; }
-    .search-box input { width: 100%; padding: 10px; box-sizing: border-box; }
+    .search-box { margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px; }
+    .search-box input, .search-box select { width: 100%; padding: 10px; box-sizing: border-box; }
     .store-card { border: 1px solid #ccc; padding: 15px; margin-bottom: 10px; border-radius: 5px; }
     .store-card h2 { margin: 0 0 10px 0; font-size: 1.2rem; }
     .store-card p { margin: 5px 0; color: #555; }
+    .genre-tag { display: inline-block; background: #eee; padding: 2px 8px; border-radius: 3px; font-size: 0.85rem; margin-bottom: 5px; }
   </style>
 </head>
 <body>
 
   <h1>店舗検索</h1>
 
-  <!-- 検索入力欄 -->
-  <div class="search-box">
-    <input type="text" id="search-input" placeholder="店舗名や住所で検索...">
-  </div>
+  <!-- 検索フォーム -->
+  <form id="searchForm" class="search-box">
+    <!-- ジャンル選択 -->
+    <select id="genreSelect">
+      <option value="all">すべてのジャンル</option>
+      <option value="百貨店・総合スーパー">百貨店・総合スーパー</option>
+      <option value="衣料品・呉服・寝具・手芸材料">衣料品・呉服・寝具・手芸材料</option>
+      <option value="医薬品(処方箋除く)・化粧品">医薬品(処方箋除く)・化粧品</option>
+      <option value="各種食料品">各種食料品</option>
+      <option value="飲食">飲食</option>
+      <option value="カメラ・写真">カメラ・写真</option>
+      <option value="宝石・時計・眼鏡等">宝石・時計・眼鏡等</option>
+      <option value="電気製品・通信機器・ミシン">電気製品・通信機器・ミシン</option>
+      <option value="スポーツ・レジャー・ペット販売">スポーツ・レジャー・ペット販売</option>
+      <option value="家具・建産・インテリア">家具・建産・インテリア</option>
+      <option value="文具・OA機器">文具・OA機器</option>
+      <option value="玩具・音楽・書籍">玩具・音楽・書籍</option>
+      <option value="日用雑貨・金物">日用雑貨・金物</option>
+      <option value="靴・鞄・帽子">靴・鞄・帽子</option>
+      <option value="理容・美容・エステ">理容・美容・エステ</option>
+      <option value="旅行">旅行</option>
+      <option value="石油・ガソリン">石油・ガソリン</option>
+      <option value="酒">酒</option>
+      <option value="米穀類">米穀類</option>
+      <option value="花・植木・種子">花・植木・種子</option>
+      <option value="九谷焼・美術・漆器">九谷焼・美術・漆器</option>
+      <option value="土産物・贈答品">土産物・贈答品</option>
+      <option value="自動車・自転車・農機具">自動車・自転車・農機具</option>
+      <option value="公衆浴場">公衆浴場</option>
+      <option value="スポーツ施設">スポーツ施設</option>
+      <option value="タクシー・代行">タクシー・代行</option>
+      <option value="旅館・ホテル">旅館・ホテル</option>
+      <option value="観光施設">観光施設</option>
+      <option value="コンビニエンスストア">コンビニエンスストア</option>
+      <option value="ドラッグストア">ドラッグストア</option>
+      <option value="その他">その他</option>
+    </select>
 
-  <form id="searchForm">
-  <!-- ジャンル選択 -->
-  <select id="genreSelect">
-    <option value="all">すべてのジャンル</option>
-    <option value="百貨店・総合スーパー">百貨店・総合スーパー</option>
-    <option value="衣料品・呉服・寝具・手芸材料">衣料品・呉服・寝具・手芸材料</option>
-    <option value="医薬品(処方箋除く)・化粧品">医薬品(処方箋除く)・化粧品</option>
-    <option value="各種食料品">各種食料品</option>
-    <option value="飲食">飲食</option>
-    <option value="カメラ・写真">カメラ・写真</option>
-    <option value="宝石・時計・眼鏡等">宝石・時計・眼鏡等</option>
-    <option value="電気製品・通信機器・ミシン">電気製品・通信機器・ミシン</option>
-    <option value="スポーツ・レジャー・ペット販売">スポーツ・レジャー・ペット販売</option>
-    <option value="家具・建産・インテリア">家具・建産・インテリア</option>
-    <option value="文具・OA機器">文具・OA機器</option>
-    <option value="玩具・音楽・書籍">玩具・音楽・書籍</option>
-    <option value="日用雑貨・金物">日用雑貨・金物</option>
-    <option value="靴・鞄・帽子">靴・鞄・帽子</option>
-    <option value="理容・美容・エステ">理容・美容・エステ</option>
-    <option value="旅行">旅行</option>
-    <option value="石油・ガソリン">石油・ガソリン</option>
-    <option value="酒">酒</option>
-    <option value="米穀類">米穀類</option>
-    <option value="花・植木・種子">花・植木・種子</option>
-    <option value="九谷焼・美術・漆器">九谷焼・美術・漆器</option>
-    <option value="土産物・贈答品">土産物・贈答品</option>
-    <option value="自動車・自転車・農機具">自動車・自転車・農機具</option>
-    <option value="公衆浴場">公衆浴場</option>
-    <option value="スポーツ施設">スポーツ施設</option>
-    <option value="タクシー・代行">タクシー・代行</option>
-    <option value="旅館・ホテル">旅館・ホテル</option>
-    <option value="観光施設">観光施設</option>
-    <option value="コンビニエンスストア">コンビニエンスストア</option>
-    <option value="ドラッグストア">ドラッグストア</option>
-    <option value="その他">その他</option>
-  </select>
+    <!-- 検索キーワード入力 -->
+    <input type="text" id="searchInput" placeholder="店舗名や住所で検索...">
 
-  <!-- 検索キーワード入力 -->
-  <input type="text" id="searchInput" placeholder="店舗名やキーワードを入力">
-
-  <!-- 検索ボタン -->
-  <button type="submit">検索</button>
-</form>
+    <!-- 検索ボタン -->
+    <button type="submit">検索</button>
+  </form>
 
   <!-- 店舗一覧表示エリア -->
   <div id="store-list">データ読み込み中...</div>
@@ -101,6 +98,7 @@
         card.className = 'store-card';
         card.innerHTML = `
           <h2>${store.name}</h2>
+          ${store.genre ? `<span class="genre-tag">${store.genre}</span>` : ''}
           <p>住所: ${store.address}</p>
           <p>TEL: ${store.tel}</p>
         `;
@@ -108,15 +106,36 @@
       });
     }
 
-    // 検索入力時のリアルタイム絞り込み処理
-    document.getElementById('search-input').addEventListener('input', (event) => {
-      const keyword = event.target.value.toLowerCase();
-      const filteredStores = storesData.filter(store => 
-        store.name.toLowerCase().includes(keyword) || 
-        store.address.toLowerCase().includes(keyword)
-      );
+    // ジャンルとキーワードで絞り込む共通処理
+    function filterStores() {
+      const selectedGenre = document.getElementById('genreSelect').value;
+      const keyword = document.getElementById('searchInput').value.toLowerCase().trim();
+
+      const filteredStores = storesData.filter(store => {
+        // ジャンルの判定（「すべてのジャンル」か、JSONのgenreと一致するか）
+        const matchesGenre = (selectedGenre === 'all') || (store.genre === selectedGenre);
+
+        // キーワードの判定（店舗名か住所に含まれているか）
+        const matchesKeyword = (store.name && store.name.toLowerCase().includes(keyword)) ||
+                               (store.address && store.address.toLowerCase().includes(keyword));
+
+        return matchesGenre && matchesKeyword;
+      });
+
       renderStores(filteredStores);
+    }
+
+    // フォーム送信（検索ボタン押下/Enterキー）時のイベント設定
+    document.getElementById('searchForm').addEventListener('submit', (event) => {
+      event.preventDefault(); // ページリロードを防止
+      filterStores();
     });
+
+    // キーワード入力時にリアルタイムで絞り込みたい場合
+    document.getElementById('searchInput').addEventListener('input', filterStores);
+
+    // ジャンル変更時に即座に絞り込みたい場合
+    document.getElementById('genreSelect').addEventListener('change', filterStores);
 
     // ページ読み込み時に実行
     loadStores();
