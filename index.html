@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>店舗検索</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: 0 auto; }
+    .search-box { margin-bottom: 20px; }
+    .search-box input { width: 100%; padding: 10px; box-sizing: border-box; }
+    .store-card { border: 1px solid #ccc; padding: 15px; margin-bottom: 10px; border-radius: 5px; }
+    .store-card h2 { margin: 0 0 10px 0; font-size: 1.2rem; }
+    .store-card p { margin: 5px 0; color: #555; }
+  </style>
+</head>
+<body>
+
+  <h1>店舗検索</h1>
+
+  <!-- 検索入力欄 -->
+  <div class="search-box">
+    <input type="text" id="search-input" placeholder="店舗名や住所で検索...">
+  </div>
+
+  <!-- 店舗一覧表示エリア -->
+  <div id="store-list">データ読み込み中...</div>
+
+  <script>
+    let storesData = [];
+
+    // 外部JSONから店舗データを取得する関数
+    async function loadStores() {
+      try {
+        const response = await fetch('stores.json');
+        if (!response.ok) {
+          throw new Error(`HTTPエラー Status: ${response.status}`);
+        }
+        storesData = await response.json();
+        renderStores(storesData);
+      } catch (error) {
+        console.error('データの取得に失敗しました:', error);
+        document.getElementById('store-list').textContent = '店舗データの読み込みに失敗しました。';
+      }
+    }
+
+    // 店舗データを画面に描画する関数
+    function renderStores(stores) {
+      const storeListContainer = document.getElementById('store-list');
+      storeListContainer.innerHTML = '';
+
+      if (stores.length === 0) {
+        storeListContainer.innerHTML = '<p>該当する店舗が見つかりませんでした。</p>';
+        return;
+      }
+
+      stores.forEach(store => {
+        const card = document.createElement('div');
+        card.className = 'store-card';
+        card.innerHTML = `
+          <h2>${store.name}</h2>
+          <p>住所: ${store.address}</p>
+          <p>TEL: ${store.tel}</p>
+        `;
+        storeListContainer.appendChild(card);
+      });
+    }
+
+    // 検索入力時のリアルタイム絞り込み処理
+    document.getElementById('search-input').addEventListener('input', (event) => {
+      const keyword = event.target.value.toLowerCase();
+      const filteredStores = storesData.filter(store => 
+        store.name.toLowerCase().includes(keyword) || 
+        store.address.toLowerCase().includes(keyword)
+      );
+      renderStores(filteredStores);
+    });
+
+    // ページ読み込み時に実行
+    loadStores();
+  </script>
+
+</body>
+</html>
